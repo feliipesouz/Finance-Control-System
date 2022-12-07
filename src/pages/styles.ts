@@ -6,7 +6,7 @@ export const Container = styled.div`
 export const Header = styled.div`
   background-color: darkblue;
   height: 150px;
-  text-align: center
+  text-align: center;
 `;
 
 export const HeaderText = styled.h1`
