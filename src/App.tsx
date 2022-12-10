@@ -1,9 +1,10 @@
 import React from "react";
-import TableArea from "./components/TableArea";
-import { items } from "./data/items";
-import { filterListByMonth, getCurrentMonth } from "./helpers/dateFilter";
-import { Body, Container, Header, HeaderText } from "./styles";
 import { Item } from "./types/Item";
+import { items } from "./data/items";
+import { getCurrentMonth, filterListByMonth } from "./helpers/dateFilter";
+import { Body, Container, Header, HeaderText } from "./styles";
+import TableArea from "./components/TableArea";
+import InfoArea from "./components/InfoArea";
 
 const App = () => {
   const [list, setList] = React.useState(items); //Lista geral, de todos os meses
@@ -20,7 +21,8 @@ const App = () => {
         <HeaderText>Sistema Financeiro</HeaderText>
       </Header>
       <Body>
-        <TableArea list={filteredList}/>
+        <InfoArea currentMonth={currentMonth}/>
+        <TableArea list={filteredList} />
       </Body>
     </Container>
   );
