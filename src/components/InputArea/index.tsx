@@ -1,5 +1,7 @@
 import React from "react";
 import { categories } from "../../data/categories";
+import { newDateAdjusted } from "../../helpers/dateFilter";
+
 import { Item } from "../../types/Item";
 import {
   Button,
@@ -20,7 +22,42 @@ const InputArea = ({ onAdd }: Props) => {
   const [titleField, setTitleField] = React.useState("");
   const [valueField, setValueField] = React.useState(0);
   let categoryKeys: string[] = Object.keys(categories);
-  const handleAddEvent = () => {};
+
+  const handleAddEvent = () => {
+    let errors: string[] = [];
+
+    if (isNaN(new Date(dateField).getTime())) {
+      errors.push("Data inválida!");
+    }
+    if (!categoryKeys.includes(categoryField)) {
+      errors.push("Categoria inválida!");
+    }
+    if (titleField === "") {
+      errors.push("Título vazio!");
+    }
+    if (valueField <= 0) {
+      errors.push("Valor inválido!");
+    }
+
+    if (errors.length > 0) {
+      alert(errors.join("\n"));
+    } else {
+      onAdd({
+        date: newDateAdjusted(dateField),
+        category: categoryField,
+        title: titleField,
+        value: valueField,
+      });
+      clearFields();
+    }
+  };
+
+  const clearFields = () => {
+    setDateField("");
+    setCategoryField("");
+    setTitleField("");
+    setValueField(0);
+  };
 
   return (
     <Container>

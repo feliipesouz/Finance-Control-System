@@ -7,7 +7,7 @@ export const getCurrentMonth = () => {
   return `${now.getFullYear()}-${now.getMonth() + 1}`; //Soma, pois o mês no javascript começa em 0, e não em 1.
 };
 
-export const filterListByMonth = (list: Item[], date: string) => {
+export const filterListByMonth = (list: Item[], date: string): Item[] => {
   let newItem: Item[] = [];
 
   for (let i in list) {
@@ -16,7 +16,7 @@ export const filterListByMonth = (list: Item[], date: string) => {
       list[i].date.getMonth() === parseInt(date)
     ) {
       newItem.push(list[i]);
-      console.log(newItem)
+      console.log("newItem", newItem);
     }
   }
   return newItem;
@@ -34,7 +34,7 @@ const addZeroToDate = (n: number): string => (n < 10 ? `0${n}` : `${n}`);
 
 export const formatCurrentMonth = (currentMonth: string): string => {
   let [year, month] = currentMonth.split("-");
-  let months = [
+  let months: string[] = [
     "Janeiro",
     "Fevereiro",
     "Março",
@@ -49,4 +49,9 @@ export const formatCurrentMonth = (currentMonth: string): string => {
     "Dezembro",
   ];
   return `${months[parseInt(month) - 1]} de ${year}`;
+};
+
+export const newDateAdjusted = (dateField: string) => {
+  let [year, month, day] = dateField.split("-");
+  return new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
 };

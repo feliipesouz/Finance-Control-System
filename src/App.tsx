@@ -16,7 +16,12 @@ const App = () => {
   const [expense, setExpense] = React.useState(0); //Despesas
 
   React.useEffect(()=>{
+    let teste = filterListByMonth(list, currentMonth)
+    console.log(list)
+    console.log(currentMonth)
+    console.log(teste)
     setFilteredList( filterListByMonth(list, currentMonth) );
+    console.log("filteredList ", filteredList)
   }, [list, currentMonth]);
 
   //Essa função recalcula o que é receita e despesa.
@@ -37,10 +42,12 @@ const App = () => {
 
   const handleMonthChange = (newMonth: string) => {
     setCurrentMonth(newMonth);
+    console.log(currentMonth)
   };
 
   const handleAddItem = (item: Item) => {
     let newList = [...list];
+    console.log('newList => ', newList)
     newList.push(item);
     setList(newList);
   }
